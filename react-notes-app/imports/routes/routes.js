@@ -5,7 +5,7 @@ import { Router as Router, Switch, Route, Redirect } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 
 import Signup from '../ui/Signup';
-import Link from '../ui/Link';
+import Dashboard from '../ui/Dashboard';
 import NotFound from '../ui/NotFound';
 import Login from '../ui/Login';
 
@@ -16,19 +16,19 @@ export const routes = (
     <Switch>
       <Route exact path="/" render={props => (
           Meteor.userId() ? (
-            <Redirect to="/links"/>
+            <Redirect to="/dashboard"/>
           ) : (
             <Login {...props} />
           )
         )}/>
       <Route exact path="/signup" render={props => (
           Meteor.userId() ? (
-            <Redirect to="/links"/>
+            <Redirect to="/dashboard"/>
           ) : (
             <Signup {...props} />
           )
         )}/>
-      <Route exact path="/links" render={props => (
+      <Route exact path="/dashboard" render={props => (
           !Meteor.userId() ? (
             <Redirect to="/"/>
           ) : (
