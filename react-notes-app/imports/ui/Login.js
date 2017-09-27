@@ -20,7 +20,7 @@ export default class Login extends React.Component {
         this.setState({error: 'Unable to login.'});
       } else {
         this.setState({error: ''});
-        this.props.history.push('/links');
+        this.props.history.push('/dashboard');
       }
     });
   }

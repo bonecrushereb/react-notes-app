@@ -32,7 +32,7 @@ export const routes = (
           !Meteor.userId() ? (
             <Redirect to="/"/>
           ) : (
-            <Link {...props}/>
+            <Dashboard {...props}/>
           )
         )}/>
       <Route component={NotFound}/>
