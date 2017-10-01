@@ -14,7 +14,7 @@ if (Meteor.isServer) {
     };
     const noteTwo = {
       _id: 'testNoteId2',
-      title: 'Things To Buy',
+      title: 'Things to buy',
       body: 'Couch',
       updatedAt: 0,
       userId: 'testUserId2'
@@ -91,7 +91,7 @@ if (Meteor.isServer) {
       const title = 'This is an updated title';
 
       Meteor.server.method_handlers['notes.update'].apply({
-        userId: 'testid'
+        userId: 'testId'
       }, [
         noteOne._id,
         { title }
@@ -114,20 +114,19 @@ if (Meteor.isServer) {
       }).toThrow();
     });
 
-    // it('should return a users notes', function () {
-    //   const res = Meteor.server.publish_handlers.notes.apply({ userId: noteOne.userId });
-    //   const notes = res.fetch();
-    //
-    //   expect(notes.length).toBe(1);
-    //   expect(notes[0]).toEqual(noteOne);
-    // });
+    it('should return a users note', function() {
+      const res = Meteor.server.publish_handlers.notes.apply({ userId: noteOne.userId });
+      const notes = res.fetch();
 
-    // it('should return no notes for user that has none', function () {
-    //   const res = Meteor.server.publish_handlers.notes.apply({ userId: 'testid' });
-    //   const notes = res.fetch();
-    //
-    //   expect(notes.length).toBe(0);
-    // });
+      expect(notes.length).toBe(1);
+      expect(notes[0]).toEqual(noteOne);
+    });
 
+    it('should return no notes for user that has none', function() {
+      const res = Meteor.server.publish_handlers.notes.apply({ userId: 'testid' });
+      const notes = res.fetch();
+
+      expect(notes.length).toBe(0);
+    });
   });
 }
