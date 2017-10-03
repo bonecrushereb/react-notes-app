@@ -19,8 +19,10 @@ if(Meteor.isClient) {
       const login = wrapper.find(Login).node;
 
       login.setState({ error });
-
       expect(wrapper.find('p').text()).toBe(error);
+
+      login.setState({ error: '' });
+      expect(wrapper.find('p').length).toBe(0);
     });
   });
 }
