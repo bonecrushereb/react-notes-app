@@ -9,7 +9,7 @@ export const PrivateHeader = (props) => {
     <div className="header">
       <div className="header__content">
         <h1 className="header__title">{props.title}</h1>
-        <button className="button button--link-text" onClick={props.handleLogout()}><Link to="/">Logout</Link></button>
+      <button className="button button--link-text" onClick={props.handleLogout()}>Logout</button>
       </div>
     </div>
   );
@@ -22,6 +22,6 @@ PrivateHeader.propTypes = {
 
 export default createContainer(() => {
   return {
-    handleLogout: () => Accounts.logout();
+    handleLogout: () => Accounts.logout()
   };
 }, PrivateHeader);
