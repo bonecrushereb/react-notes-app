@@ -7,6 +7,7 @@ import { PrivateHeader } from './PrivateHeader';
 
 if(Meteor.isClient) {
   describe('PrivateHeader', function() {
+
     it('should set button text to logout', function() {
       const wrapper = mount( <PrivateHeader title="Test title" handleLogout={() => {}}/> );
       const buttonText = wrapper.find('button').text();
