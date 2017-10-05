@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import propTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -37,7 +37,7 @@ export class Login extends React.Component {
           <form onSubmit={this.onSubmit.bind(this)} noValidate className="boxed-view__form">
             <input type="email" ref="email" name="email" placeholder="example@example.com"/>
             <input type="password" ref="password" name="password" placeholder="password"/>
-          <button className="button">Login</button>
+            <button className="button">Login</button>
           </form>
 
           <Link to="/signup">Have an account?</Link>

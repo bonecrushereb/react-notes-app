@@ -54,10 +54,11 @@ if(Meteor.isClient) {
         </MemoryRouter>
       );
 
-      console.log(wrapper.find('form.boxed-view__form').simulate('submit'));
+      wrapper.find('form').simulate('submit');
 
+      debugger;
       spy.calls[0].arguments[2]({});
-      expect(wrapper.state('error')).toNotBe(null);
+      expect(wrapper.state('error').length).toNotBe(0);
 
     });
   });
