@@ -57,9 +57,9 @@ if(Meteor.isClient) {
       );
 
       const login = wrapper.find(Login).node;
-
       const email = document.getElementsByName('email').value = '';
       const password = document.getElementsByName('password').value = '';
+      debugger;
 
       wrapper.find('form').simulate('submit', {
         preventDefault: () => {}

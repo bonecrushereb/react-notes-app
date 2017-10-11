@@ -16,19 +16,19 @@ export const routes = (
     <Switch>
       <Route exact path="/" render={props => (
           Meteor.userId() ? (
-            <Redirect to="/dashboard"/>
+            <Redirect to="/Dashboard"/>
           ) : (
             <Login {...props} />
           )
         )}/>
       <Route exact path="/signup" render={props => (
           Meteor.userId() ? (
-            <Redirect to="/dashboard"/>
+            <Redirect to="/Dashboard"/>
           ) : (
             <Signup {...props} />
           )
         )}/>
-      <Route exact path="/dashboard" render={props => (
+      <Route exact path="/Dashboard" render={props => (
           !Meteor.userId() ? (
             <Redirect to="/"/>
           ) : (
