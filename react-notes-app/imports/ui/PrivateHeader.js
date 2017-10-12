@@ -28,7 +28,7 @@ export default withRouter(createContainer(() => {
   return {
     handleLogout: () => {
       Accounts.logout()
-      props.history.push('/')
+      this.props.history.push('/')
     }
   };
 }, PrivateHeader));
