@@ -1,10 +1,14 @@
 import React from 'react';
 import { Accounts } from 'meteor/accounts-base';
-import { withRouter } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 import propTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+
 import { createContainer } from 'meteor/react-meteor-data';
 
   const PrivateHeader = (props) => {
+    const history = createHistory();
+    // debugger;
   return (
     <div className="header">
       <div className="header__content">
@@ -20,13 +24,11 @@ PrivateHeader.propTypes = {
   handleLogout: propTypes.func.isRequired
 };
 
-export default createContainer(() => {
+export default withRouter(createContainer(() => {
   return {
     handleLogout: () => {
       Accounts.logout()
-      this.props.history.push('/')
+      props.history.push('/')
     }
   };
-}, PrivateHeader)
-
- withRouter(PrivateHeader);
+}, PrivateHeader));

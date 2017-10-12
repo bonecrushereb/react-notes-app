@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
+import { withRouter } from 'react-router-dom';
+
 
 export default class Login extends React.Component {
   constructor(props) {
