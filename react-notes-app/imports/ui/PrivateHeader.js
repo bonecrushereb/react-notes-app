@@ -1,6 +1,6 @@
 import React from 'react';
 import { Accounts } from 'meteor/accounts-base';
-// import createHistory from 'history/createBrowserHistory';
+import createHistory from 'history/createBrowserHistory';
 import propTypes from 'prop-types';
 import { browserHistory } from 'react-router';
 import { withRouter } from 'react-router-dom';
@@ -22,11 +22,11 @@ PrivateHeader.propTypes = {
   handleLogout: propTypes.func.isRequired
 };
 
-export default withRouter(createContainer(() => {
+export default withRouter(createContainer((props) => {
   return {
     handleLogout: () => {
       Accounts.logout(),
-      this.props.history.push('/')
+      props.history.push('/')
     }
   };
 }, PrivateHeader));
