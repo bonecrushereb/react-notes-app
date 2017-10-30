@@ -39,6 +39,7 @@ if(Meteor.isClient) {
           <PrivateHeader title="Test title" handleLogout={spy}/>
         </MemoryRouter>
       );
+
       wrapper.find('button').simulate('click');
 
       expect(spy).toHaveBeenCalled();
