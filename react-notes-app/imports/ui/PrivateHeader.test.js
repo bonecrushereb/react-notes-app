@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import {createMemoryHistory} from 'history';
 import expect from 'expect';
 import { mount } from 'enzyme';
 
@@ -33,16 +34,19 @@ if(Meteor.isClient) {
     });
 
     it('should call handleLogout on click', function() {
-      const spy = expect.createSpy();
       const wrapper = mount(
-        <MemoryRouter initialEntries={['/']} initialIndex={0}>
-          <PrivateHeader title="Test title" handleLogout={spy}/>
+        <MemoryRouter initialEntries={['/Dashboard']} initialIndex={0}>
+          <PrivateHeader title="Test title" handleLogout={() => {}}/>
         </MemoryRouter>
       );
 
-      wrapper.find('button').simulate('click');
 
-      expect(spy).toHaveBeenCalled();
+      // debugger;
+
+      wrapper.find('button').simulate('click');
+      console.log(wrapper.find('PrivateHeader').nodes);
+
+      // expect(wrapper.find('PrivateHeader').nodes.props.history.entries[1].pathname).toBe('/');
     });
   });
 }
