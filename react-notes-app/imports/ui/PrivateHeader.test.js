@@ -40,13 +40,9 @@ if(Meteor.isClient) {
         </MemoryRouter>
       );
 
-
-      // debugger;
-
       wrapper.find('button').simulate('click');
-      console.log(wrapper.find('PrivateHeader').nodes);
 
-      // expect(wrapper.find('PrivateHeader').nodes.props.history.entries[1].pathname).toBe('/');
+      expect(wrapper.find('PrivateHeader').nodes[0].props.history.entries[1].pathname).toBe('/');
     });
   });
 }
