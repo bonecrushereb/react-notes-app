@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import expect from 'expect';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 import { Login } from './Login';
 
@@ -44,15 +44,21 @@ if(Meteor.isClient) {
 
       expect(spy).toHaveBeenCalled;
       expect(spy.calls[0].arguments[0]).toEqual({ email });
+      expect(spy.calls[0].arguments[1]).toBe('password123');
 
     });
 
     it('should set loginWithPassword callback errors', function() {
-      const wrapper = mount(
-        <MemoryRouter intialEntries={['/']} initialIndex={0}>
-          <Login loginWithPassword={() => {}}/>
-        </MemoryRouter>
-      );
+      const spy = expect.createSpy();
+      const wrapper = shallow( <Login loginWithPassword={spy}/> );
+
+      wrapper.find('form').simulate('submit', {
+        preventDefault: () => {}
+      });
+
+      debugger;
+
+      expect(wrapper.state('error')).toNotBe('');
     });
   }); //end of describe block
 }

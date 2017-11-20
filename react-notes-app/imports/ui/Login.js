@@ -10,14 +10,20 @@ export class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: ''
+      error: '',
+      email: '',
+      password: ''
     };
   }
+  handleFormChange(e) {
+    this.setState({ [e.target.name ]: e.target.value });
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
-    let email = this.refs.email.value.trim();
-    let password = this.refs.password.value.trim();
+    let email = this.state.email.trim();
+    let password = this.state.password.trim();
 
     this.props.loginWithPassword({email}, password, (err) => {
       if (err) {
@@ -37,8 +43,8 @@ export class Login extends React.Component {
           {this.state.error ? <p>{this.state.error}</p> : undefined}
 
           <form onSubmit={this.onSubmit.bind(this)} noValidate className="boxed-view__form">
-            <input type="email" ref="email" name="email" placeholder="example@example.com"/>
-            <input type="password" ref="password" name="password" placeholder="password"/>
+            <input type="email" value={this.state.email} name="email" placeholder="example@example.com" onChange={this.handleFormChange.bind(this)}/>
+            <input type="password" value={this.state.password} name="password" placeholder="password" onChange={this.handleFormChange.bind(this)}/>
           <button className="button">Login</button>
           </form>
 
