@@ -31,16 +31,22 @@ if(Meteor.isClient) {
       const email = 'test@test.com';
       const password = 'password123';
       const spy = expect.createSpy();
-      const wrapper = mount(
-        <MemoryRouter intialEntries={['/']} initialIndex={0}>
+      const wrapper = shallow(
           <Login loginWithPassword={spy}/>
-        </MemoryRouter>
       );
 
-      wrapper.find(Login).node.refs['email'].value = email;
-      wrapper.find(Login).node.refs['password'].value = password;
+      // debugger;
+      // console.log(wrapper.find('form').node.props.children[1]);
+      wrapper.find('form').node.props.children[0].props.value = email;
+      wrapper.find('form').node.props.children[1].props.value = password;
 
-      wrapper.find('form').simulate('submit');
+      debugger;
+      // wrapper.find(Login).node.props['email'].value = email;
+      // wrapper.find(Login).node.refs['password'].value = password;
+      //
+      wrapper.find('form').simulate('submit', {
+        preventDefault: () => {}
+      });
 
       expect(spy).toHaveBeenCalled;
       expect(spy.calls[0].arguments[0]).toEqual({ email });
@@ -48,17 +54,17 @@ if(Meteor.isClient) {
 
     });
 
-    it('should set loginWithPassword callback errors', function() {
-      const spy = expect.createSpy();
-      const wrapper = shallow( <Login loginWithPassword={spy}/> );
-
-      wrapper.find('form').simulate('submit', {
-        preventDefault: () => {}
-      });
-
-      debugger;
-
-      expect(wrapper.state('error')).toNotBe('');
-    });
+    // it('should set loginWithPassword callback errors', function() {
+    //   const spy = expect.createSpy();
+    //   const wrapper = shallow( <Login loginWithPassword={spy}/> );
+    //
+    //   wrapper.find('form').simulate('submit', {
+    //     preventDefault: () => {}
+    //   });
+    //
+    //   debugger;
+    //
+    //   expect(wrapper.state('error')).toNotBe('');
+    // });
   }); //end of describe block
 }
