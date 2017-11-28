@@ -36,11 +36,9 @@ if(Meteor.isClient) {
       );
 
       // debugger;
-      // console.log(wrapper.find('form').node.props.children[1]);
       wrapper.find('form').node.props.children[0].props.value = email;
       wrapper.find('form').node.props.children[1].props.value = password;
 
-      debugger;
       // wrapper.find(Login).node.props['email'].value = email;
       // wrapper.find(Login).node.refs['password'].value = password;
       //
