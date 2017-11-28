@@ -35,13 +35,19 @@ if(Meteor.isClient) {
           <Login loginWithPassword={spy}/>
       );
 
-      // debugger;
-      wrapper.find('form').node.props.children[0].props.value = email;
-      wrapper.find('form').node.props.children[1].props.value = password;
+      wrapper.find('[name="email"]').simulate('change', {
+        target: {
+          value: email
+        }
+      });
+      wrapper.find('[name="password"]').simulate('change', {
+        target: {
+          value: password
+        }
+      });
 
-      // wrapper.find(Login).node.props['email'].value = email;
-      // wrapper.find(Login).node.refs['password'].value = password;
-      //
+      debugger;
+
       wrapper.find('form').simulate('submit', {
         preventDefault: () => {}
       });
