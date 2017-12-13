@@ -35,7 +35,7 @@ if(Meteor.isClient) {
           <Login loginWithPassword={spy}/>
       );
 
-      wrapper.find('[name="email"]').simulate('change', {
+      wrapper.find('input').simulate('change', {
         target: {
           value: email
         }
