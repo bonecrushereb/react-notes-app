@@ -35,18 +35,20 @@ if(Meteor.isClient) {
           <Login loginWithPassword={spy}/>
       );
 
-      wrapper.find('input').simulate('change', {
+
+      wrapper.find('[name="email"]').simulate('change', {
         target: {
+          name: 'email',
           value: email
         }
       });
       wrapper.find('[name="password"]').simulate('change', {
         target: {
+          name: 'password',
           value: password
         }
       });
 
-      debugger;
 
       wrapper.find('form').simulate('submit', {
         preventDefault: () => {}
