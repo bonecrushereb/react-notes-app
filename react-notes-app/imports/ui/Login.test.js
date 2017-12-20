@@ -60,17 +60,17 @@ if(Meteor.isClient) {
 
     });
 
-    // it('should set loginWithPassword callback errors', function() {
-    //   const spy = expect.createSpy();
-    //   const wrapper = shallow( <Login loginWithPassword={spy}/> );
-    //
-    //   wrapper.find('form').simulate('submit', {
-    //     preventDefault: () => {}
-    //   });
-    //
-    //   debugger;
-    //
-    //   expect(wrapper.state('error')).toNotBe('');
-    // });
+    it('should set loginWithPassword callback errors', function() {
+      const spy = expect.createSpy();
+      const wrapper = shallow( <Login loginWithPassword={spy}/> );
+
+      wrapper.find('form').simulate('submit', {
+        preventDefault: () => {}
+      });
+
+      debugger;
+
+      expect(wrapper.state('error')).toNotBe('');
+    });
   }); //end of describe block
 }
