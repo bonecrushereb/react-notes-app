@@ -68,9 +68,15 @@ if(Meteor.isClient) {
         preventDefault: () => {}
       });
 
+
+      spy.calls[0].arguments[2]({});
+      expect(wrapper.state('error').length).toNotBe(0);
+
       debugger;
 
-      expect(wrapper.state('error')).toNotBe('');
+      spy.calls[0].arguments[2]();
+      expect(wrapper.state('error')).toBe('');
+
     });
   }); //end of describe block
 }
