@@ -72,11 +72,6 @@ if(Meteor.isClient) {
       spy.calls[0].arguments[2]({});
       expect(wrapper.state('error').length).toNotBe(0);
 
-      debugger;
-
-      spy.calls[0].arguments[2]();
-      expect(wrapper.state('error')).toBe('');
-
     });
   }); //end of describe block
 }
