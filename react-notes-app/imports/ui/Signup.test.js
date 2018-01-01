@@ -27,7 +27,7 @@ if(Meteor.isClient) {
       expect(wrapper.find('p').length).toBe(0);
     });
 
-    it('should call loginWithPassword with the form data', function() {
+    it('should call createUser with the form data', function() {
       const email = 'test@test.com';
       const password = 'password123';
       const spy = expect.createSpy();
@@ -54,9 +54,7 @@ if(Meteor.isClient) {
         preventDefault: () => {}
       });
 
-      expect(spy).toHaveBeenCalled;
-      expect(spy.calls[0].arguments[0]).toEqual({ email });
-      expect(spy.calls[0].arguments[1]).toBe('password123');
+      expect(spy.calls[0].arguments[0]).toEqual({ email, password });
 
     });
     //
