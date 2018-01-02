@@ -57,18 +57,57 @@ if(Meteor.isClient) {
       expect(spy.calls[0].arguments[0]).toEqual({ email, password });
 
     });
-    //
-    // it('should set loginWithPassword callback errors', function() {
-    //   const spy = expect.createSpy();
-    //   const wrapper = shallow( <Login loginWithPassword={spy}/> );
-    //
-    //   wrapper.find('form').simulate('submit', {
-    //     preventDefault: () => {}
-    //   });
-    //
-    //   spy.calls[0].arguments[2]({});
-    //   expect(wrapper.state('error').length).toNotBe(0);
-    //
-    // });
+
+    it('should set error if short password', function() {
+      const email = 'test@test.com';
+      const password = '123      ';
+      const spy = expect.createSpy();
+      const wrapper = shallow(
+          <Signup createUser={spy}/>
+      );
+
+
+      wrapper.find('[name="email"]').simulate('change', {
+        target: {
+          name: 'email',
+          value: email
+        }
+      });
+      wrapper.find('[name="password"]').simulate('change', {
+        target: {
+          name: 'password',
+          value: password
+        }
+      });
+
+
+      wrapper.find('form').simulate('submit', {
+        preventDefault: () => {}
+      });
+
+      expect(wrapper.state('error').length).toNotBe(0);
+    });
+
+    it('should set createUser callback errors', function() {
+      const password = 'password123!';
+      const reason = 'this is why it failed';
+      const spy = expect.createSpy();
+      const wrapper = shallow( <Signup createUser={spy}/> );
+
+      wrapper.find('[name="password"]').simulate('change', {
+        target: {
+          name: 'password',
+          value: password
+        }
+      });
+
+      wrapper.find('form').simulate('submit', {
+        preventDefault: () => {}
+      });
+
+      spy.calls[0].arguments[1]({ reason });
+      expect(wrapper.state('error')).toBe(reason);
+
+    });
   }); //end of describe block
 }
