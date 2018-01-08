@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import propTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 
 export const NoteListHeader = (props) => {
@@ -11,6 +12,10 @@ export const NoteListHeader = (props) => {
     </div>
   );
 };
+
+NoteListHeader.propTypes = {
+  meteorCall: propTypes.func.isRequired
+}
 
 export default createContainer(() => {
   return {

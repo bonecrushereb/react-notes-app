@@ -66,7 +66,6 @@ if(Meteor.isClient) {
           <Signup createUser={spy}/>
       );
 
-
       wrapper.find('[name="email"]').simulate('change', {
         target: {
           name: 'email',
