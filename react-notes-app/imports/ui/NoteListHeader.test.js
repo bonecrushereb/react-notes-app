@@ -1,14 +1,14 @@
-import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import expect from 'expect';
 import { mount } from 'enzyme';
+import { Meteor } from 'meteor/meteor';
 
-import NoteListHeader from './NoteListHeader';
+import { NoteListHeader } from './NoteListHeader';
 
-if(Meteor.isClient) {
-  describe('NoteListHeader', function() {
+if (Meteor.isClient) {
+  describe('NoteListHeader', function () {
 
-    it('should call meteorCall on click', function() {
+    it('should call meteorCall on click', function () {
       const spy = expect.createSpy();
       const wrapper = mount(<NoteListHeader meteorCall={spy}/>);
 
@@ -16,5 +16,6 @@ if(Meteor.isClient) {
 
       expect(spy).toHaveBeenCalledWith('notes.insert');
     });
-  }); //end of describe
+
+  });
 }
