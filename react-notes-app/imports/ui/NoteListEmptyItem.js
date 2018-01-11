@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 
-export default () => {
+const NotListEmptyItem = () => {
   return (
     <div>
       <h5>You have no notes</h5>
@@ -9,3 +9,5 @@ export default () => {
     </div>
   );
 };
+
+export default NotListEmptyItem;
