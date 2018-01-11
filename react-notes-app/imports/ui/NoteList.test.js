@@ -1,12 +1,11 @@
-import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import expect from 'expect';
 import { mount } from 'enzyme';
+import { Meteor } from 'meteor/meteor';
 
 import { NoteList } from './NoteList';
 
-if(Meteor.isClient) {
-
+if (Meteor.isClient) {
   const  notes = [
       {
         _id: 'noteId1',
@@ -24,6 +23,7 @@ if(Meteor.isClient) {
   ];
 
   describe('NoteList', function () {
+
     it('should render NoteListItem for each note', function () {
       const wrapper = mount(<NoteList notes={notes}/>);
 
@@ -32,10 +32,11 @@ if(Meteor.isClient) {
     });
 
     it('should render NoteListEmptyItem if zero notes', function () {
-      const wrapper = mount(<NoteList notes={[]}/>)
+      const wrapper = mount(<NoteList notes={[]}/>);
 
       expect(wrapper.find('NoteListItem').length).toBe(0);
       expect(wrapper.find('NoteListEmptyItem').length).toBe(1);
     });
-  }); //end of describe
+
+  });
 }
