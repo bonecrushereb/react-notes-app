@@ -35,6 +35,13 @@ export const routes = (
             <Dashboard {...props}/>
           )
         )}/>
+      <Route exact path="/Dashboard/:id" render={props => (
+          !Meteor.userId() ? (
+            <Redirect to="/"/>
+          ) : (
+            <Dashboard {...props}/>
+          )
+        )}/>
       <Route component={NotFound}/>
     </Switch>
 </Router>
