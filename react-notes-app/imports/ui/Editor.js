@@ -2,22 +2,35 @@ import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
 import propTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 
 import { Notes } from '../api/notes';
 
 export class Editor extends React.Component {
+  handleBodyChange(e) {
+    this.props.call('notes.update', this.props.note._id, {
+      body: e.target.value
+    });
+  }
+  handleTitleChange(e) {
+    this.props.call('notes.update', this.props.note._id, {
+      title: e.target.value
+    });
+  }
   render () {
     if (this.props.note) {
       return (
-        <p>we got the note</p>
-      );
-    } else if (this.props.selectedNoteId) {
-      return (
-        <p>Note not found.</p>
+        <div>
+          <input value={this.props.note.title} placeholder="Untitled Note" onChange={this.handleTitleChange.bind(this)}/>
+          <textarea value={this.props.note.body} placeholder="Your not here" onChange={this.handleBodyChange.bind(this)}></textarea>
+          <button>Delete Note</button>
+        </div>
       );
     } else {
       return (
-        <p>Pick or Create a note to get started.</p>
+        <p>
+          { this.props.selectedNoteId ? 'Note not found!' : 'Pick or Create a note to get started.' }
+        </p>
       );
     }
   }
@@ -25,7 +38,7 @@ export class Editor extends React.Component {
 
 Editor.propTypes = {
   notes: propTypes.object,
-  selectedNoteId: propTypes.string
+  selectedNoteId: propTypes.string,
 }
 
 export default createContainer(() => {
@@ -33,6 +46,7 @@ export default createContainer(() => {
 
   return {
     selectedNoteId,
-    note: Notes.findOne(selectedNoteId)
+    note: Notes.findOne(selectedNoteId),
+    call: Meteor.call
   };
 }, Editor);
