@@ -12,6 +12,10 @@ import Login from '../ui/Login';
 
 const history = createBrowserHistory();
 
+const onLeaveNotePage = () => {
+  Session.set('selectedNoteId', undefined);
+};
+
 export const routes = (
   <Router history={history}>
     <Switch>
@@ -36,7 +40,7 @@ export const routes = (
             <Dashboard {...props}/>
           )
         )}/>
-      <Route exact path="/Dashboard/:id" privacy="auth" render={props => (
+      <Route exact path="/Dashboard/:id" privacy="auth" onLeave={onLeaveNotePage} render={props => (
             !Meteor.userId() ? (
               <Redirect to="/"/>
             ) : (
