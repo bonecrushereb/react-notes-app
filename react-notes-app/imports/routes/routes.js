@@ -15,35 +15,28 @@ const history = createBrowserHistory();
 export const routes = (
   <Router history={history}>
     <Switch>
-      <Route exact path="/" render={props => (
+      <Route exact path="/" privacy="unauth" render={props => (
           Meteor.userId() ? (
             <Redirect to="/Dashboard"/>
           ) : (
             <Login {...props} />
           )
         )}/>
-      <Route exact path="/signup" render={props => (
+      <Route exact path="/signup" privacy="unauth" render={props => (
           Meteor.userId() ? (
             <Redirect to="/Dashboard"/>
           ) : (
             <Signup {...props} />
           )
         )}/>
-      <Route exact path="/Dashboard" render={props => (
+      <Route exact path="/Dashboard" privacy="auth" render={props => (
           !Meteor.userId() ? (
             <Redirect to="/"/>
           ) : (
             <Dashboard {...props}/>
           )
         )}/>
-        <Route exact path="/Dashboard" render={props => (
-           !Meteor.userId() ? (
-             <Redirect to="/"/>
-           ) : (
-             <Dashboard {...props}/>
-           )
-         )}/>
-         <Route exact path="/Dashboard/:id" render={props => (
+      <Route exact path="/Dashboard/:id" privacy="auth" render={props => (
             !Meteor.userId() ? (
               <Redirect to="/"/>
             ) : (
@@ -51,7 +44,7 @@ export const routes = (
               <Dashboard {...props}/>
             )
           )}/>
-      <Route component={NotFound}/>
+        <Route path="*" component={NotFound}/>
     </Switch>
 </Router>
 );
