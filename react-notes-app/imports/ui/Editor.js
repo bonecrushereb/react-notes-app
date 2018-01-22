@@ -7,11 +7,19 @@ import { Notes } from '../api/notes';
 
 export class Editor extends React.Component {
   render () {
-    return (
-      <div>
-        <h1>Editor</h1>
-      </div>
-    );
+    if (this.props.note) {
+      return (
+        <p>we got the note</p>
+      );
+    } else if (this.props.selectedNoteId) {
+      return (
+        <p>Note not found.</p>
+      );
+    } else {
+      return (
+        <p>Pick or Create a note to get started.</p>
+      );
+    }
   }
 };
 
