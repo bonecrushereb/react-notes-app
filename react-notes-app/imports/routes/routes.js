@@ -43,13 +43,14 @@ export const routes = (
              <Dashboard {...props}/>
            )
          )}/>
-       <Route exact path="/Dashboard/:id" render={props => (
-           !Meteor.userId() ? (
-             <Redirect to="/"/>
-           ) : (
-             Session.set('selectedNoteId', props.match.params.id)
-           )
-         )}/>
+         <Route exact path="/Dashboard/:id" render={props => (
+            !Meteor.userId() ? (
+              <Redirect to="/"/>
+            ) : (
+              Session.set('selectedNoteId', props.match.params.id),
+              <Dashboard {...props}/>
+            )
+          )}/>
       <Route component={NotFound}/>
     </Switch>
 </Router>
