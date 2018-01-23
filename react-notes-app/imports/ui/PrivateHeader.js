@@ -2,7 +2,6 @@ import React from 'react';
 import { Accounts } from 'meteor/accounts-base';
 import createHistory from 'history/createBrowserHistory';
 import propTypes from 'prop-types';
-import { browserHistory } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 
