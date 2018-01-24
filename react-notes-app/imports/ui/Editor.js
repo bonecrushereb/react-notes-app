@@ -27,8 +27,8 @@ export class Editor extends React.Component {
   }
   handleRemoval() {
     console.log(' note removed', this.props.note._id);
-    // this.props.call('notes.remove', this.props.notes._id);
-    // this.props.history.push('/');
+    this.props.call('notes.remove', this.props.notes._id);
+    this.props.history.push('/');
   }
   componentDidUpdate(prevProps, prevState) {
     const currentNoteId = this.props.note ? this.props.note._id : undefined;
