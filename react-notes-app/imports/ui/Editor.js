@@ -25,23 +25,22 @@ export class Editor extends React.Component {
     this.setState({ title });
     this.props.call('notes.update', this.props.note._id, { title });
   }
-  handleRemoval() {
-    console.log(' note removed', this.props.note._id);
-    this.props.call('notes.remove', this.props.notes._id);
-    this.props.history.push('/');
+  handleRemoval(){
+    this.props.call('notes.remove', this.props.note._id);
+    this.props.history.push('/dashboard');
   }
   componentDidUpdate(prevProps, prevState) {
     const currentNoteId = this.props.note ? this.props.note._id : undefined;
-    const prevNoteId = prevProps.notes ? prevProps.note._id : undefined;
+    const prevNoteId = prevProps.note ? prevProps.note._id : undefined;
 
-    if(currentNoteId && currentNoteId !== prevNoteId) {
+    if (currentNoteId && currentNoteId !== prevNoteId) {
       this.setState({
         title: this.props.note.title,
         body: this.props.note.body
-      })
+      });
     }
   }
-  render () {
+  render() {
     if (this.props.note) {
       return (
         <div>
@@ -53,7 +52,7 @@ export class Editor extends React.Component {
     } else {
       return (
         <p>
-          { this.props.selectedNoteId ? 'Note not found!' : 'Pick or Create a note to get started.' }
+          { this.props.selectedNoteId ? 'Note not found.' : 'Pick or create a note to get started.'}
         </p>
       );
     }
@@ -63,6 +62,7 @@ export class Editor extends React.Component {
 Editor.propTypes = {
   notes: propTypes.object,
   selectedNoteId: propTypes.string,
+  call: propTypes.func.isRequired
 }
 
 export default withRouter(createContainer(() => {
