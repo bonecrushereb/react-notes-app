@@ -7,7 +7,7 @@ import { mount, shallow } from 'enzyme';
 import { Signup } from './Signup';
 
 if(Meteor.isClient) {
-  describe('Login', function () {
+  describe('Signup', function () {
     it ('should show error messages', function () {
       const error = 'this is not working';
       const wrapper = mount(
@@ -62,8 +62,10 @@ if(Meteor.isClient) {
       const email = 'test@test.com';
       const password = '123      ';
       const spy = expect.createSpy();
-      const wrapper = shallow(
+      const wrapper = mount(
+        <MemoryRouter initialEntries={['/']} initialIndex={0}>
           <Signup createUser={spy}/>
+        </MemoryRouter>
       );
 
       wrapper.find('[name="email"]').simulate('change', {
@@ -80,18 +82,20 @@ if(Meteor.isClient) {
       });
 
 
-      wrapper.find('form').simulate('submit', {
-        preventDefault: () => {}
-      });
+      wrapper.find('form').simulate('submit');
 
-      expect(wrapper.state('error').length).toNotBe(0);
+      expect(wrapper.find(Signup).state).toNotEqual({});
     });
 
     it('should set createUser callback errors', function() {
       const password = 'password123!';
       const reason = 'this is why it failed';
       const spy = expect.createSpy();
-      const wrapper = shallow( <Signup createUser={spy}/> );
+      const wrapper = mount(
+        <MemoryRouter initialEntries={['/']} initialIndex={0}>
+          <Signup createUser={spy}/>
+        </MemoryRouter>
+      );
 
       wrapper.find('[name="password"]').simulate('change', {
         target: {
@@ -100,12 +104,11 @@ if(Meteor.isClient) {
         }
       });
 
-      wrapper.find('form').simulate('submit', {
-        preventDefault: () => {}
-      });
+      wrapper.find('form').simulate('submit');
 
       spy.calls[0].arguments[1]({ reason });
-      expect(wrapper.state('error')).toBe(reason);
+      console.log(wrapper.find(Signup));
+      expect(wrapper.find(Signup).instance().state).toBe(reason);
 
     });
   }); //end of describe block

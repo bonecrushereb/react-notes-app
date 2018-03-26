@@ -62,15 +62,19 @@ if(Meteor.isClient) {
 
     it('should set loginWithPassword callback errors', function() {
       const spy = expect.createSpy();
-      const wrapper = shallow( <Login loginWithPassword={spy}/> );
+      const wrapper = mount(
+        <MemoryRouter initialEntries={['/']} initialIndex={0}>
+          <Login loginWithPassword={spy}/>
+        </MemoryRouter>
+      );
 
-      wrapper.find('form').simulate('submit', {
-        preventDefault: () => {}
-      });
+      wrapper.find('form').simulate('submit');
 
-      spy.calls[0].arguments[2]({});
-      expect(wrapper.state('error').length).toNotBe(0);
+      spy.calls[0].arguments[2]({error: 'Error'});
+      expect(wrapper.find(Login).state).toNotEqual({});
 
+      // spy.calls[0].arguments[2]();
+      // expect(wrapper.find(Login).state).toEqual({ error: ''});
     });
   }); //end of describe block
 }
