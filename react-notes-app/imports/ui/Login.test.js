@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 import expect from 'expect';
 import { mount, shallow } from 'enzyme';
 
@@ -61,10 +62,11 @@ if(Meteor.isClient) {
     });
 
     it('should set loginWithPassword callback errors', function() {
+      const history = createBrowserHistory();
       const spy = expect.createSpy();
       const wrapper = mount(
         <MemoryRouter initialEntries={['/']} initialIndex={0}>
-          <Login loginWithPassword={spy}/>
+          <Login loginWithPassword={spy} history={push: spy}/>
         </MemoryRouter>
       );
 
@@ -73,8 +75,8 @@ if(Meteor.isClient) {
       spy.calls[0].arguments[2]({error: 'Error'});
       expect(wrapper.find(Login).state).toNotEqual({});
 
-      // spy.calls[0].arguments[2]();
-      // expect(wrapper.find(Login).state).toEqual({ error: ''});
+      spy.calls[0].arguments[2]();
+      expect(wrapper.find(Login).state).toEqual({ error: ''});
     });
   }); //end of describe block
 }
