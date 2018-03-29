@@ -66,7 +66,7 @@ if(Meteor.isClient) {
       const spy = expect.createSpy();
       const wrapper = mount(
         <MemoryRouter initialEntries={['/']} initialIndex={0}>
-          <Login loginWithPassword={spy} history={push: spy}/>
+          <Login loginWithPassword={spy}/>
         </MemoryRouter>
       );
 
