@@ -30,7 +30,7 @@ export class Login extends React.Component {
         this.setState({error: 'Unable to login.'});
       } else {
         this.setState({error: ''});
-        this.props.history.push('/dashboard');
+        this.history.push('/dashboard');
       }
     });
   }
