@@ -107,8 +107,7 @@ if(Meteor.isClient) {
       wrapper.find('form').simulate('submit');
 
       spy.calls[0].arguments[1]({ reason });
-      console.log(wrapper.find(Signup));
-      expect(wrapper.find(Signup).instance().state).toBe(reason);
+      expect(wrapper.find(Signup).node.state.error).toBe(reason);
 
     });
   }); //end of describe block
