@@ -76,7 +76,8 @@ if(Meteor.isClient) {
       expect(wrapper.find(Login).state).toNotEqual({});
 
       spy.calls[0].arguments[2]();
-      expect(wrapper.find(Login).state).toEqual({ error: ''});
+      // debugger;
+      expect(wrapper.find(Login).node.state.error).toBe('');
     });
   }); //end of describe block
 }
