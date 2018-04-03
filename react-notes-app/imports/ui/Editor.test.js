@@ -49,7 +49,21 @@ if (Meteor.isClient) {
       });
 
       expect(wrapper.state('body')).toBe(newBody);
-      expect(call).toHaveBeenCalledWith('notes.update', notes[0]._id, { body: newBody});
+      expect(call).toHaveBeenCalledWith('notes.update', notes[0]._id, { body: newBody });
+    });
+
+    it('should update the note title on input change', function() {
+      const newTitle = 'New Title';
+      const wrapper = mount(<Editor history={history} call={call} selectedNoteId={notes[0]._id} note={notes[0]}/>);
+
+      wrapper.find('input').simulate('change', {
+        target: {
+          value: newTitle
+        }
+      });
+
+      expect(wrapper.state('title')).toBe(newTitle);
+      expect(call).toHaveBeenCalledWith('notes.update', notes[0]._id, { title: newTitle });
     });
   }); //end of describe
 }
