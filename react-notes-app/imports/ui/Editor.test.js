@@ -39,8 +39,17 @@ if (Meteor.isClient) {
     });
 
     it('should update the note body on textarea change', function() {
+      const newBody = 'this is my new body text';
       const wrapper = mount(<Editor history={history} call={call} selectedNoteId={notes[0]._id} note={notes[0]}/>);
 
+      wrapper.find('textarea').simulate('change', {
+        target: {
+          value: newBody
+        }
+      });
+
+      expect(wrapper.state('body')).toBe(newBody);
+      expect(call).toHaveBeenCalledWith('notes.update', notes[0]._id, { body: newBody});
     });
   }); //end of describe
 }
