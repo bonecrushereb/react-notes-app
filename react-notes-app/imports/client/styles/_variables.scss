@@ -47,6 +47,3 @@ $item-border-width: 4px;
 $page-content-sidebar-width: 30rem;
 $page-content-main-width: calc(#{$site-max-width} - #{$page-content-sidebar-width});
 $page-content-height: calc(100vh - #{$header-height});
-
-//Media Query
-$mediaChange: 50rem;

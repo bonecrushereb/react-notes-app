@@ -1,10 +1,16 @@
+@mixin desktop {
+  @media(min-width: 50rem) {
+    @content;
+  }
+}
+
 .page-content {
   display: flex;
   height: $page-content-height;
   margin: 0 auto;
   max-width: $site-max-width;
 
-  @media(min-width: $mediaChange) {
+  @include desktop {
     padding: $large-space $space;
   }
 }
@@ -14,7 +20,7 @@
   padding-right: $large-space;
   width: $page-content-sidebar-width;
 
-  @media(min-width: $mediaChange) {
+  @include desktop {
     display: flex;
   }
 }
@@ -24,7 +30,7 @@
   display: flex;
   width: 100%;
 
-  @media(min-width: $mediaChange) {
+  @include desktop {
     width: $page-content-main-width;
   }
 }
