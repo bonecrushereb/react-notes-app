@@ -7,6 +7,8 @@ cache:
     - node-modules
 before_install:
    - "curl -L http://git.io/3l-rRA | /bin/sh"
+install:
+  - npm install
 env:
   - LAIKA_OPTIONS="-t 5000"
 script:
