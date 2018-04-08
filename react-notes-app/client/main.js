@@ -13,6 +13,7 @@ const history = createBrowserHistory();
 
 Tracker.autorun(() => {
   const selectedNoteId = Session.get('selectedNoteId');
+  Session.set('isNavOpen', false);
 
   if(selectedNoteId) {
     history.replace(`/Dashboard/${selectedNoteId}`);
