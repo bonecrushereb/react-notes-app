@@ -13,7 +13,7 @@ if(Meteor.isClient) {
     it('should set button text to logout', function() {
       const wrapper = mount(
         <MemoryRouter initialEntries={['/']} initialIndex={0}>
-          <PrivateHeader title="Test title" handleLogout={() => {}}/>
+          <PrivateHeader title="Test title" handleLogout={() => {}} />
         </MemoryRouter>
       );
       const buttonText = wrapper.find('button').text();
