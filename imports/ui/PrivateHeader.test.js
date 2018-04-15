@@ -3,6 +3,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import expect from 'expect';
+import { Session } from 'meteor/session';
 import { mount } from 'enzyme';
 
 import PrivateHeader  from './PrivateHeader';
@@ -13,9 +14,10 @@ if(Meteor.isClient) {
     it('should set button text to logout', function() {
       const wrapper = mount(
         <MemoryRouter initialEntries={['/']} initialIndex={0}>
-          <PrivateHeader title="Test title" handleLogout={() => {}} />
+          <PrivateHeader title="Test title" handleLogout={() => {}} isNavOpen={Session.get('isNavOpen')} />
         </MemoryRouter>
       );
+
       const buttonText = wrapper.find('button').text();
 
       expect(buttonText).toBe('Logout');
@@ -25,7 +27,7 @@ if(Meteor.isClient) {
       const title = 'Title test here';
       const wrapper = mount(
         <MemoryRouter initialEntries={['/']} initialIndex={0}>
-          <PrivateHeader title="Test title" handleLogout={() => {}}/>
+          <PrivateHeader title="Test title" handleLogout={() => {}} isNavOpen={Session.get('isNavOpen')} />
         </MemoryRouter>
       );
       const h1Text = wrapper.find('h1').text();
@@ -34,11 +36,11 @@ if(Meteor.isClient) {
     });
 
     it('should call handleLogout on click', function() {
-      const wrapper = mount(
-        <MemoryRouter initialEntries={['/Dashboard']} initialIndex={0}>
-          <PrivateHeader title="Test title" handleLogout={() => {}}/>
-        </MemoryRouter>
-      );
+        const wrapper = mount(
+          <MemoryRouter initialEntries={['/Dashboard']} initialIndex={0}>
+            <PrivateHeader title="Test title" handleLogout={() => {}} isNavOpen={Session.get('isNavOpen')} />
+          </MemoryRouter>
+        );
 
       wrapper.find('button').simulate('click');
 
