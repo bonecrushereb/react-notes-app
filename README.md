@@ -30,5 +30,5 @@ To use the app locally on a personal computer run `npm i` in the terminal. Once 
 ##Tests
 To run the tests all that needs to be run in the terminal is `npm test` This will run the backend and front end tests.
 
-  The final site can be found here 
+  The final site can be found here (https://notestracker.herokuapp.com/)
 
